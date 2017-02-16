@@ -1,7 +1,7 @@
 function X=ea_genfeaturesfromvta(uipatdirs, stimname)
 
 
-ea_run_mapper(uipatdirs, stimname);
+%ea_run_mapper(uipatdirs, stimname);
 options.prefs=ea_prefs('');
 
 fts=load(fullfile(ea_getearoot,'predict','models','horn_fox','feature_idx.mat'));
@@ -9,7 +9,7 @@ allfeatsix=cell2mat(fts.idx');
 
 switch options.prefs.lcm.vatseed
     case 'binary'
-        efsx='_';
+        efsx='';
     case 'efield_gauss'
         efsx='efield_gauss_';
     case 'efield'
@@ -61,6 +61,7 @@ for pat=1:length(allpatdirs)
 options.root=[fileparts(allpatdirs{pat}),filesep];
 [~,thispatdir]=fileparts(allpatdirs{pat});
 options.patientname=thispatdir;
+options.uipatdirs=allpatdirs{pat};
 ea_run('run',options);
 end
 
